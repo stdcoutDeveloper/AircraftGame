@@ -5,8 +5,20 @@
 
 int main()
 {
-    AircraftGame::Game game;
-    game.Run();
+    try
+    {
+        AircraftGame::Game game;
+        game.Run();
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+        return EXIT_FAILURE;
+    }
+    catch (...)
+    {
+        return EXIT_FAILURE;
+    }
 
     return EXIT_SUCCESS;
 }

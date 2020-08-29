@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 namespace AircraftGame
 {
@@ -10,11 +11,15 @@ namespace AircraftGame
         const float PLAYER_SPEED = 100.0f;
         const sf::Time TIME_PER_FRAME = sf::seconds(1.0f / 60.0f);
 
-        Game() : window_(sf::VideoMode(640, 480), "SFML Application"), player_()
+        Game() : window_(sf::VideoMode(640, 480), "SFML Application"), texture_(), player_()
         {
-            player_.setRadius(40.0f);
+            if (!texture_.loadFromFile("../Resources/Textures/Eagle.png"))
+            {
+                // TODO: handle exception
+            }
+
+            player_.setTexture(texture_);
             player_.setPosition(100.0f, 100.0f);
-            player_.setFillColor(sf::Color::Cyan);
         }
 
         void Run()
@@ -26,6 +31,8 @@ namespace AircraftGame
             {
                 ProcessEvents();
                 timeSinceLastUpdate += clock.restart();
+                std::cout << timeSinceLastUpdate.asSeconds() << std::endl;
+
                 while (timeSinceLastUpdate > TIME_PER_FRAME)
                 {
                     timeSinceLastUpdate -= TIME_PER_FRAME;
@@ -37,10 +44,10 @@ namespace AircraftGame
         }
 
     private:
-        bool isMovingUp_ = false, isMovingDown_ = false, isMovingLeft_ = false, isMovingRight_ = false;
-
         sf::RenderWindow window_;
-        sf::CircleShape player_;
+        sf::Texture texture_;
+        sf::Sprite player_;
+        bool isMovingUp_ = false, isMovingDown_ = false, isMovingLeft_ = false, isMovingRight_ = false;
 
         /**
          * \brief Handles user input
