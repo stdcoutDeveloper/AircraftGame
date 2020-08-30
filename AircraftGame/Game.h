@@ -31,7 +31,6 @@ namespace AircraftGame
             {
                 ProcessEvents();
                 timeSinceLastUpdate += clock.restart();
-                std::cout << timeSinceLastUpdate.asSeconds() << std::endl;
 
                 while (timeSinceLastUpdate > TIME_PER_FRAME)
                 {

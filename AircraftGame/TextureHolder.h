@@ -4,6 +4,7 @@
 #include <map>
 #include <memory>
 #include <string>
+#include <cassert>
 
 namespace AircraftGame
 {
@@ -21,31 +22,25 @@ namespace AircraftGame
         {
             auto texturePtr = std::make_unique<sf::Texture>();
             if (!texturePtr->loadFromFile(fileName))
-            {
-                // TODO: handle error
-            }
+                throw std::runtime_error(
+                    "[" + std::string(__FUNCTION__) + "@" + std::to_string(__LINE__) + "] Failed to load " + fileName);
 
-            textureMap_.insert(std::make_pair(id, std::move(texturePtr)));
+            auto pair = textureMap_.insert(std::make_pair(id, std::move(texturePtr)));
+            assert(pair.second);
         }
 
         sf::Texture& GetTexture(TextureID id)
         {
             auto itr = textureMap_.find(id);
-            if (itr == std::end(textureMap_))
-            {
-                // TODO: handle not found
-            }
+            assert(itr != std::end(textureMap_));
 
             return *(itr->second);
         }
 
         const sf::Texture& GetTexture(TextureID id) const
         {
-            const auto itr = textureMap_.find(id);
-            if (itr == std::cend(textureMap_))
-            {
-                // TODO: handle not found
-            }
+            auto itr = textureMap_.find(id);
+            assert(itr != std::end(textureMap_));
 
             return *(itr->second);
         }
