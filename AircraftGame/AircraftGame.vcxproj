@@ -165,8 +165,11 @@
     <ClCompile Include="AircraftGame.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Aircraft.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="TextureHolder.h" />
+    <ClInclude Include="ResourceHolder.h" />
+    <ClInclude Include="SceneNode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
