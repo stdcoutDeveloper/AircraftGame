@@ -5,7 +5,7 @@
 
 namespace AircraftGame
 {
-    enum class CategoryType
+    enum CategoryType
     {
         NONE = 0,
         SCENE = 1 << 0,
@@ -18,7 +18,7 @@ namespace AircraftGame
 
     struct Command
     {
-        Command() : category_(CategoryType::NONE)
+        Command() : action_(), category_(NONE)
         {
         }
 

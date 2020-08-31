@@ -3,6 +3,7 @@
 #include "Aircraft.h"
 #include <array>
 #include "SpriteNode.h"
+#include "CommandQueue.h"
 
 namespace AircraftGame
 {
@@ -41,6 +42,9 @@ namespace AircraftGame
                 playerAircraft_->SetVelocity(velocity);
             }
 
+            while (!commandQueue_.IsEmpty())
+                sceneGraph_.OnCommand(commandQueue_.Pop(), deltaTime);
+
             sceneGraph_.Update(deltaTime);
         }
 
@@ -50,12 +54,18 @@ namespace AircraftGame
             window_.draw(sceneGraph_);
         }
 
+        const CommandQueue& GetCommandQueue() const
+        {
+            return commandQueue_;
+        }
+
     private:
         sf::RenderWindow& window_;
         sf::View worldView_;
         TextureHolder textures_;
         SceneNode sceneGraph_;
         std::array<SceneNode*, static_cast<size_t>(WorldLayer::LAYER_COUNT)> sceneLayers_;
+        CommandQueue commandQueue_;
 
         sf::FloatRect worldBounds_;
         sf::Vector2f spawnPosition_;

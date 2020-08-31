@@ -31,8 +31,9 @@ namespace AircraftGame
         CategoryType GetCategory() const override
         {
             if (type_ == AircraftType::EAGLE)
-                return CategoryType::PLAYER_AIRCRAFT;
-            return CategoryType::ENEMY_AIRCRAFT;
+                return PLAYER_AIRCRAFT;
+
+            return ENEMY_AIRCRAFT;
         }
 
     private:

@@ -79,7 +79,17 @@ namespace AircraftGame
 
         virtual CategoryType GetCategory() const
         {
-            return CategoryType::SCENE;
+            return SCENE;
+        }
+
+        // execute command of player
+        void OnCommand(const Command& command, sf::Time deltaTime)
+        {
+            if (command.category_ & GetCategory())
+                command.action_(*this, deltaTime);
+
+            for (const auto& e : childrens_)
+                e->OnCommand(command, deltaTime);
         }
 
     private:
