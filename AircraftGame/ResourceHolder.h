@@ -9,7 +9,7 @@
 namespace AircraftGame
 {
     /**
-     * \brief Template for managing resources: textures, fonts and sound buffers. 
+     * \brief Template for managing resources: textures, fonts and sound buffers.
      */
     template <typename Resource, typename Identifier>
     class ResourceHolder
@@ -66,7 +66,8 @@ namespace AircraftGame
     enum class TextureID
     {
         EAGLE,
-        RAPTOR
+        RAPTOR,
+        DESERT
     };
 
     typedef ResourceHolder<sf::Texture, TextureID> TextureHolder;

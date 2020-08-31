@@ -1,7 +1,6 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include <iostream>
+#include "World.h"
 
 namespace AircraftGame
 {
@@ -11,15 +10,8 @@ namespace AircraftGame
         const float PLAYER_SPEED = 100.0f;
         const sf::Time TIME_PER_FRAME = sf::seconds(1.0f / 60.0f);
 
-        Game() : window_(sf::VideoMode(640, 480), "SFML Application"), texture_(), player_()
+        Game() : window_(sf::VideoMode(640, 480), "SFML Application", sf::Style::Close), world_(window_)
         {
-            if (!texture_.loadFromFile("../Resources/Textures/Eagle.png"))
-            {
-                // TODO: handle exception
-            }
-
-            player_.setTexture(texture_);
-            player_.setPosition(100.0f, 100.0f);
         }
 
         void Run()
@@ -35,18 +27,21 @@ namespace AircraftGame
                 while (timeSinceLastUpdate > TIME_PER_FRAME)
                 {
                     timeSinceLastUpdate -= TIME_PER_FRAME;
+
                     ProcessEvents();
-                    Update(timeSinceLastUpdate);
+                    if (!isPaused_)
+                        Update(TIME_PER_FRAME);
                 }
+
                 Render();
             }
         }
 
     private:
         sf::RenderWindow window_;
-        sf::Texture texture_;
-        sf::Sprite player_;
+        World world_;
         bool isMovingUp_ = false, isMovingDown_ = false, isMovingLeft_ = false, isMovingRight_ = false;
+        bool isPaused_ = false;
 
         /**
          * \brief Handles user input
@@ -67,6 +62,12 @@ namespace AircraftGame
                 case sf::Event::Closed:
                     window_.close();
                     break;
+                case sf::Event::GainedFocus:
+                    isPaused_ = false;
+                    break;
+                case sf::Event::LostFocus:
+                    isPaused_ = true;
+                    break;
                 }
             }
         }
@@ -76,7 +77,9 @@ namespace AircraftGame
          */
         void Update(sf::Time deltaTime)
         {
-            sf::Vector2f movement(0.0f, 0.0f);
+            world_.Update(deltaTime);
+
+            /*sf::Vector2f movement(0.0f, 0.0f);
 
             if (isMovingUp_)
                 movement.y -= PLAYER_SPEED;
@@ -87,19 +90,22 @@ namespace AircraftGame
             if (isMovingRight_)
                 movement.x += PLAYER_SPEED;
 
-            player_.move(movement * deltaTime.asSeconds());
+            player_.move(movement * deltaTime.asSeconds());*/
         }
 
         /**
          * \brief Renders the game to the screen
          * First, clear the window with a color, usually black
-         * Then, draw all the objects of the current frame 
+         * Then, draw all the objects of the current frame
          * After drawn everything, display it on the screen
          */
         void Render()
         {
             window_.clear();
-            window_.draw(player_);
+            world_.Draw();
+
+            window_.setView(window_.getDefaultView());
+            //window_.draw(player_);
             window_.display();
         }
 

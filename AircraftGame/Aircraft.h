@@ -28,20 +28,22 @@ namespace AircraftGame
             target.draw(sprite_, states);
         }
 
+        CategoryType GetCategory() const override
+        {
+            if (type_ == AircraftType::EAGLE)
+                return CategoryType::PLAYER_AIRCRAFT;
+            return CategoryType::ENEMY_AIRCRAFT;
+        }
+
     private:
         AircraftType type_;
         sf::Sprite sprite_;
 
         TextureID GetTextureIDByAircraftType() const
         {
-            switch (type_)
-            {
-            case AircraftType::EAGLE:
+            if (type_ == AircraftType::EAGLE)
                 return TextureID::EAGLE;
-
-            case AircraftType::RAPTOR:
-                return TextureID::RAPTOR;
-            }
+            return TextureID::RAPTOR;
         }
     };
 }

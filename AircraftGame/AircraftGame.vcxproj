@@ -166,10 +166,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aircraft.h" />
+    <ClInclude Include="Command.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="ResourceHolder.h" />
     <ClInclude Include="SceneNode.h" />
+    <ClInclude Include="SpriteNode.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

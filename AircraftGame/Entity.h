@@ -25,5 +25,11 @@ namespace AircraftGame
 
     private:
         sf::Vector2f velocity_;
+
+        void UpdateCurrentNode(sf::Time deltaTime) override
+        {
+            // method of Transformable
+            move(velocity_ * deltaTime.asSeconds());
+        }
     };
 }
