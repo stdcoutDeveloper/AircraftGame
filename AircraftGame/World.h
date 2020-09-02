@@ -120,13 +120,13 @@ namespace AircraftGame
             sceneLayers_[static_cast<int>(Layer::AIR)]->AttachChildren(std::move(leader));
 
             // add 2 escorts
-            std::unique_ptr<Aircraft> leftEscort(new Aircraft(AircraftType::RAPTOR, textures_));
+            /*std::unique_ptr<Aircraft> leftEscort(new Aircraft(AircraftType::RAPTOR, textures_));
             leftEscort->setPosition(-80.0f, 50.0f);
             playerAircraft_->AttachChildren(std::move(leftEscort));
 
             std::unique_ptr<Aircraft> rightEscort(new Aircraft(AircraftType::RAPTOR, textures_));
             rightEscort->setPosition(80.0f, 50.0f);
-            playerAircraft_->AttachChildren(std::move(rightEscort));
+            playerAircraft_->AttachChildren(std::move(rightEscort));*/
         }
     };
 }
