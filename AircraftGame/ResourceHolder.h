@@ -71,4 +71,11 @@ namespace AircraftGame
     };
 
     typedef ResourceHolder<sf::Texture, TextureID> TextureHolder;
+
+    enum class FontsID
+    {
+        MAIN
+    };
+
+    typedef ResourceHolder<sf::Font, FontsID> FontHolder;
 }
