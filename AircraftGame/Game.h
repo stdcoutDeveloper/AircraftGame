@@ -1,6 +1,7 @@
 #pragma once
 
 #include "World.h"
+#include "Player.h"
 
 namespace AircraftGame
 {
@@ -21,14 +22,14 @@ namespace AircraftGame
 
             while (window_.isOpen())
             {
-                ProcessEvents();
+                ProcessInput();
                 timeSinceLastUpdate += clock.restart();
 
                 while (timeSinceLastUpdate > TIME_PER_FRAME)
                 {
                     timeSinceLastUpdate -= TIME_PER_FRAME;
 
-                    ProcessEvents();
+                    ProcessInput();
                     if (!isPaused_)
                         Update(TIME_PER_FRAME);
                 }
@@ -40,25 +41,31 @@ namespace AircraftGame
     private:
         sf::RenderWindow window_;
         World world_;
+        Player player_;
+
         bool isMovingUp_ = false, isMovingDown_ = false, isMovingLeft_ = false, isMovingRight_ = false;
         bool isPaused_ = false;
 
         /**
          * \brief Handles user input
          */
-        void ProcessEvents()
+        void ProcessInput()
         {
+            auto& commands = world_.GetCommandQueue();
+
             sf::Event event;
             while (window_.pollEvent(event))
             {
+                player_.HandleEvent(event, commands);
+
                 switch (event.type)
                 {
-                case sf::Event::KeyPressed:
-                    HandlePlayerInput(event.key.code, true);
-                    break;
-                case sf::Event::KeyReleased:
-                    HandlePlayerInput(event.key.code, false);
-                    break;
+                    /*case sf::Event::KeyPressed:
+                        HandlePlayerInput(event.key.code, true);
+                        break;
+                    case sf::Event::KeyReleased:
+                        HandlePlayerInput(event.key.code, false);
+                        break;*/
                 case sf::Event::Closed:
                     window_.close();
                     break;
@@ -70,6 +77,8 @@ namespace AircraftGame
                     break;
                 }
             }
+
+            player_.HandleRealtimeInput(commands);
         }
 
         /**

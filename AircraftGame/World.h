@@ -17,6 +17,8 @@ namespace AircraftGame
     class World : private sf::NonCopyable
     {
     public:
+        const float BORDER_DISTANCE = 40.0f;
+
         explicit World(sf::RenderWindow& window) : window_(window), worldView_(window_.getDefaultView()),
                                                    textures_(), sceneGraph_(), sceneLayers_(),
                                                    worldBounds_(0.0f, 0.0f, worldView_.getSize().x, 2000.0f),
@@ -34,18 +36,36 @@ namespace AircraftGame
         {
             worldView_.move(0.0f, scrollSpeed_ * deltaTime.asSeconds());
 
-            sf::Vector2f position = playerAircraft_->getPosition();
+            playerAircraft_->SetVelocity(0.0f, 0.0f);
+
+            /*sf::Vector2f position = playerAircraft_->getPosition();
             sf::Vector2f velocity = playerAircraft_->GetVelocity();
             if (position.x <= worldBounds_.left + 150 || position.x >= worldBounds_.left + worldBounds_.width - 150)
             {
                 velocity.x = -velocity.x;
                 playerAircraft_->SetVelocity(velocity);
-            }
+            }*/
 
             while (!commandQueue_.IsEmpty())
                 sceneGraph_.OnCommand(commandQueue_.Pop(), deltaTime);
 
+            sf::Vector2f velocity = playerAircraft_->GetVelocity();
+            if (velocity.x != 0.0f && velocity.y != 0.0f)
+                playerAircraft_->SetVelocity(velocity / std::sqrt(2.0f));
+
+            playerAircraft_->Accelerate(0.0f, scrollSpeed_);
+
             sceneGraph_.Update(deltaTime);
+
+            // whether the plane leaves the visible area of the screen?
+            sf::FloatRect viewBounds(worldView_.getCenter() - worldView_.getSize() / 2.0f, worldView_.getSize());
+
+            sf::Vector2f position = playerAircraft_->getPosition();
+            position.x = std::max(position.x, viewBounds.left + BORDER_DISTANCE);
+            position.x = std::min(position.x, viewBounds.left + viewBounds.width - BORDER_DISTANCE);
+            position.y = std::max(position.y, viewBounds.top + BORDER_DISTANCE);
+            position.y = std::min(position.y, viewBounds.top + viewBounds.height - BORDER_DISTANCE);
+            playerAircraft_->setPosition(position);
         }
 
         void Draw()
@@ -54,7 +74,7 @@ namespace AircraftGame
             window_.draw(sceneGraph_);
         }
 
-        const CommandQueue& GetCommandQueue() const
+        CommandQueue& GetCommandQueue()
         {
             return commandQueue_;
         }

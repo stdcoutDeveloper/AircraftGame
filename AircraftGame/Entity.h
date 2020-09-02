@@ -23,6 +23,17 @@ namespace AircraftGame
             return velocity_;
         }
 
+        void Accelerate(sf::Vector2f velocity)
+        {
+            velocity_ += velocity;
+        }
+
+        void Accelerate(float velocityX, float velocityY)
+        {
+            velocity_.x += velocityX;
+            velocity_.y += velocityY;
+        }
+
     private:
         sf::Vector2f velocity_;
 

@@ -170,6 +170,7 @@
     <ClInclude Include="CommandQueue.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="ResourceHolder.h" />
     <ClInclude Include="SceneNode.h" />
     <ClInclude Include="SpriteNode.h" />

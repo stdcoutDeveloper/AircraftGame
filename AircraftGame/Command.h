@@ -31,4 +31,15 @@ namespace AircraftGame
 
         CategoryType category_;
     };
+
+    template <typename GameObject, typename Function>
+    std::function<void(SceneNode&, sf::Time)> DerivedAction(Function function)
+    {
+        return [=](SceneNode& node, sf::Time deltaTime)
+        {
+            assert(dynamic_cast<GameObject*>(&node) != nullptr);
+
+            function(static_cast<GameObject&>(node), deltaTime);
+        };
+    }
 }

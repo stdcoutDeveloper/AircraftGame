@@ -44,6 +44,7 @@ namespace AircraftGame
         {
             if (type_ == AircraftType::EAGLE)
                 return TextureID::EAGLE;
+
             return TextureID::RAPTOR;
         }
     };
