@@ -38,14 +38,6 @@ namespace AircraftGame
 
             playerAircraft_->SetVelocity(0.0f, 0.0f);
 
-            /*sf::Vector2f position = playerAircraft_->getPosition();
-            sf::Vector2f velocity = playerAircraft_->GetVelocity();
-            if (position.x <= worldBounds_.left + 150 || position.x >= worldBounds_.left + worldBounds_.width - 150)
-            {
-                velocity.x = -velocity.x;
-                playerAircraft_->SetVelocity(velocity);
-            }*/
-
             while (!commandQueue_.IsEmpty())
                 sceneGraph_.OnCommand(commandQueue_.Pop(), deltaTime);
 

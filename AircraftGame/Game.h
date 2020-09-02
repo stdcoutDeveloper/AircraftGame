@@ -60,12 +60,6 @@ namespace AircraftGame
 
                 switch (event.type)
                 {
-                    /*case sf::Event::KeyPressed:
-                        HandlePlayerInput(event.key.code, true);
-                        break;
-                    case sf::Event::KeyReleased:
-                        HandlePlayerInput(event.key.code, false);
-                        break;*/
                 case sf::Event::Closed:
                     window_.close();
                     break;
@@ -87,19 +81,6 @@ namespace AircraftGame
         void Update(sf::Time deltaTime)
         {
             world_.Update(deltaTime);
-
-            /*sf::Vector2f movement(0.0f, 0.0f);
-
-            if (isMovingUp_)
-                movement.y -= PLAYER_SPEED;
-            if (isMovingDown_)
-                movement.y += PLAYER_SPEED;
-            if (isMovingLeft_)
-                movement.x -= PLAYER_SPEED;
-            if (isMovingRight_)
-                movement.x += PLAYER_SPEED;
-
-            player_.move(movement * deltaTime.asSeconds());*/
         }
 
         /**
@@ -114,20 +95,7 @@ namespace AircraftGame
             world_.Draw();
 
             window_.setView(window_.getDefaultView());
-            //window_.draw(player_);
             window_.display();
-        }
-
-        void HandlePlayerInput(sf::Keyboard::Key key, bool isPressed)
-        {
-            if (key == sf::Keyboard::W || key == sf::Keyboard::Up)
-                isMovingUp_ = isPressed;
-            else if (key == sf::Keyboard::S || key == sf::Keyboard::Down)
-                isMovingDown_ = isPressed;
-            else if (key == sf::Keyboard::A || key == sf::Keyboard::Left)
-                isMovingLeft_ = isPressed;
-            else if (key == sf::Keyboard::D || key == sf::Keyboard::Right)
-                isMovingRight_ = isPressed;
         }
     };
 }

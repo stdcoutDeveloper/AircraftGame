@@ -32,7 +32,7 @@ namespace AircraftGame
     class Player
     {
     public:
-        const float PLAYER_SPEED = 30.0f;
+        const float PLAYER_SPEED = 3.0f; // proper speed???
 
         Player()
         {
