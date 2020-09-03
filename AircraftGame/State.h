@@ -45,18 +45,22 @@ namespace AircraftGame
     protected:
         void RequestStackPush(StatesID stateID)
         {
+            stack_->PushState(stateID);
         }
 
         void RequestStackPop()
         {
+            stack_->PopState();
         }
 
         void RequestStateClear()
         {
+            stack_->ClearStates();
         }
 
         Context GetContext() const
         {
+            return context_;
         }
 
     private:

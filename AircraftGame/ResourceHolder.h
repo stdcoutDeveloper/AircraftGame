@@ -67,7 +67,8 @@ namespace AircraftGame
     {
         EAGLE,
         RAPTOR,
-        DESERT
+        DESERT,
+        TITLE_SCREEN
     };
 
     typedef ResourceHolder<sf::Texture, TextureID> TextureHolder;
