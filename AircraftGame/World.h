@@ -75,6 +75,7 @@ namespace AircraftGame
         sf::RenderWindow& window_;
         sf::View worldView_;
         TextureHolder textures_;
+
         SceneNode sceneGraph_;
         std::array<SceneNode*, static_cast<size_t>(WorldLayer::LAYER_COUNT)> sceneLayers_;
         CommandQueue commandQueue_;

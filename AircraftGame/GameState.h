@@ -16,14 +16,28 @@ namespace AircraftGame
 
         void Draw() override
         {
+            world_.Draw();
         }
 
         bool Update(sf::Time deltaTime) override
         {
+            world_.Update(deltaTime);
+
+            CommandQueue& commands = world_.GetCommandQueue();
+            player_.HandleRealtimeInput(commands);
+
+            return true;
         }
 
         bool HandleEvent(const sf::Event& event) override
         {
+            CommandQueue& commands = world_.GetCommandQueue();
+            player_.HandleEvent(event, commands);
+
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+                RequestStackPush(StatesID::PAUSE);
+
+            return true;
         }
 
     private:

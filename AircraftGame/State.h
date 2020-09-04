@@ -7,6 +7,10 @@
 
 namespace AircraftGame
 {
+    class StateStack;
+
+    class Player;
+
     /**
      * \biref Work as a holder of shared objects between all states of the game
      */
@@ -22,8 +26,6 @@ namespace AircraftGame
         FontHolder* fonts_;
         Player* player_;
     };
-
-    class StateStack;
 
     class State
     {

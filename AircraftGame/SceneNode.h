@@ -10,6 +10,8 @@
 
 namespace AircraftGame
 {
+    struct Command;
+
     enum class Layer
     {
         BACKGROUND,
@@ -79,7 +81,7 @@ namespace AircraftGame
 
         virtual CategoryType GetCategory() const
         {
-            return SCENE;
+            return CategoryType::SCENE;
         }
 
         // execute command of player

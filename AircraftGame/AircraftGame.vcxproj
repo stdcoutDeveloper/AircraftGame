@@ -172,7 +172,9 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="LoadingState.h" />
     <ClInclude Include="MenuState.h" />
+    <ClInclude Include="ParallelTask.h" />
     <ClInclude Include="PauseState.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ResourceHolder.h" />
@@ -181,6 +183,7 @@
     <ClInclude Include="State.h" />
     <ClInclude Include="StateStack.h" />
     <ClInclude Include="TitleState.h" />
+    <ClInclude Include="Utility.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
